@@ -2,22 +2,22 @@
 import Discord from 'discord.js';
 
 //Local imports
-import Guild from '../database/models/guild.model';
-import Logger from '../logger';
-import Client from '../@types/Client.interface';
-import Message from '../@types/Message.interface';
-import GuildType from '../@types/Guild.interface';
+import Guild from '../../database/models/guild.model';
+import Logger from '../../logger';
+import Client from '../../@types/Client.interface';
+import Message from '../../@types/Message.interface';
+import GuildType from '../../@types/Guild.interface';
 
 const logger = new Logger();
 
-const Queue = (bot: Client) => {
+const NowPlaying = (bot: Client) => {
     bot.on('message', async (message: Message) => {
         try {
             const guild: GuildType = await Guild.findOne({
                 id: message.guild.id,
             }) as GuildType;
             const prefix: String = guild.prefix;
-            if (message.content.startsWith(`${prefix}queue`)) {
+            if (message.content.startsWith(`${prefix}nowplaying`)) {
                 if (!message.member.voice.channel) {
                     message.reply("You must be in a voice channel to do this.");
                     return;
@@ -26,16 +26,10 @@ const Queue = (bot: Client) => {
                 if (!player) {
                     return message.reply('Nothing playing at the moment.')
                 }
-                const queue = new Discord.MessageEmbed();
-                queue.setTitle('__**QUEUE**__')
-                queue.addField('\u200b', '**Now Playing**')
-                queue.addField('\u200b', player.queue.current.title)
-                queue.addField('\u200b', '**Next Up**')
-                await player.queue.forEach((current: any) => {
-                    console.log(current)
-                    queue.addField('\u200b', current.title)
-                })
-                message.channel.send(queue)
+                const nowplaying = new Discord.MessageEmbed();
+                nowplaying.setTitle('**Now Playing**')
+                nowplaying.addField('\u200b', player.queue.current.title)
+                message.channel.send(nowplaying)
             } else {
                 return null;
             }
@@ -47,4 +41,4 @@ const Queue = (bot: Client) => {
 }
 
 //Exports
-export default Queue;
+export default NowPlaying;

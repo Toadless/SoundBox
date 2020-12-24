@@ -1,12 +1,9 @@
-//General imports
-import { Manager } from 'erela.js';
-
 //Local imports
-import Guild from '../database/models/guild.model';
-import Logger from '../logger';
-import Client from '../@types/Client.interface';
-import Message from '../@types/Message.interface';
-import GuildType from '../@types/Guild.interface';
+import Guild from '../../database/models/guild.model';
+import Logger from '../../logger';
+import Client from '../../@types/Client.interface';
+import Message from '../../@types/Message.interface';
+import GuildType from '../../@types/Guild.interface';
 
 const logger = new Logger();
 

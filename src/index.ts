@@ -4,47 +4,20 @@ import Discord from 'discord.js';
 //Local imports
 import * as Config from '../config.json';
 import Logger from './logger';
-
-//All module imports - barrel
-import {
-    Connect,
-    guildCreate,
-    MusicManager,
-    Ready,
-    Raw,
-    Play,
-    Skip,
-    Stop,
-    Queue,
-    Prefix,
-    Help,
-    Activity,
-    Volume
-} from './barrel';
+import Load from './load';
 
 //Constants
 const bot = new Discord.Client();
 const logger = new Logger();
+
+bot.setMaxListeners(100); //Setting the max amount of event listeners.
 
 //Displaying banner
 logger.banner('Sound Box')
 
 bot.on('ready', () => {
     logger.success('Logged into bot!')
-    //Loading all modules
-    Connect(bot);
-    guildCreate(bot);
-    MusicManager(bot);
-    Ready(bot);
-    Raw(bot);
-    Play(bot);
-    Skip(bot);
-    Stop(bot);
-    Queue(bot);
-    Prefix(bot);
-    Help(bot);
-    Activity(bot);
-    Volume(bot);
+    Load(bot); //Loading all of the bots files like - play - prefix - skip when the bot starts
 })
 
 //Logging into the bot

@@ -6,6 +6,7 @@ import Guild from '../database/models/guild.model';
 import Logger from '../logger';
 import Client from '../@types/Client.interface';
 import GuildType from '../@types/Guild.interface';
+import Config from '../../config.json';
 
 const logger = new Logger();
 
@@ -32,18 +33,16 @@ const guildCreate: Function = (bot: Client) => {
             channel.send(embed);
         } catch (err) {
             logger.warn('Failed to send the welcome message')
-        } finally {
-            try {
-                const newGuild: GuildType = new Guild({
-                    id: guild.id,
-                    prefix: '!'
-                }) as GuildType;
-                newGuild.save();
-            } catch (err) {
-                logger.error('Failed to create a new database value for a guild.')
-            } finally {
-                logger.success('Successfully created a new guilds database.')
-            }
+        }
+        try {
+            const newGuild: GuildType = new Guild({
+                id: guild.id,
+                prefix: Config.bot.default_prefix
+            }) as GuildType;
+            newGuild.save();
+            logger.success('Successfully created a new guilds database.')
+        } catch (err) {
+            logger.error('Failed to create a new database value for a guild.')
         }
     })
 }
