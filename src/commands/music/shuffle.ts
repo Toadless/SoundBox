@@ -5,8 +5,6 @@ import Client from '../../@types/Client.interface';
 import Message from '../../@types/Message.interface';
 import GuildType from '../../@types/Guild.interface';
 
-const logger = new Logger();
-
 const Shuffle = (bot: Client) => {
     bot.on('message', async (message: Message) => {
         try {
@@ -29,7 +27,7 @@ const Shuffle = (bot: Client) => {
                 return null;
             }
         } catch (err) {
-            logger.warn(`An error occured whilst skipping a song in ${message.guild.id}`)
+            Logger.warn(`An error occured whilst skipping a song in ${message.guild.id}`)
             message.reply('An error occured.')
         }
     })

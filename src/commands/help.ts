@@ -8,8 +8,6 @@ import Client from '../@types/Client.interface';
 import Message from '../@types/Message.interface';
 import GuildType from '../@types/Guild.interface';
 
-const logger = new Logger();
-
 const Queue = (bot: Client) => {
     bot.on('message', async (message: Message) => {
         try {
@@ -28,7 +26,7 @@ const Queue = (bot: Client) => {
                 message.channel.send(help);
             }
         } catch (err) {
-            logger.warn(`An error occured whilst sending the help command in in ${message.guild.id}`)
+            Logger.warn(`An error occured whilst sending the help command in in ${message.guild.id}`)
             message.reply('An error occured.')
         }
     })

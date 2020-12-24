@@ -5,8 +5,6 @@ import Client from '../../@types/Client.interface';
 import Message from '../../@types/Message.interface';
 import GuildType from '../../@types/Guild.interface';
 
-const logger = new Logger();
-
 const Skip = (bot: Client) => {
     bot.on('message', async (message: Message) => {
         try {
@@ -28,14 +26,14 @@ const Skip = (bot: Client) => {
                     player.stop();
                     player.play();
                 } catch (err) {
-                    logger.warn(`An error occured whilst skipping a song in ${message.guild.id}`)
+                    Logger.warn(`An error occured whilst skipping a song in ${message.guild.id}`)
                     message.reply('An error occured.')
                 }
             } else {
                 return null;
             }
         } catch (err) {
-            logger.warn(`An error occured whilst skipping a song in ${message.guild.id}`)
+            Logger.warn(`An error occured whilst skipping a song in ${message.guild.id}`)
             message.reply('An error occured.')
         }
     })

@@ -5,8 +5,6 @@ import Client from '../../@types/Client.interface';
 import Message from '../../@types/Message.interface';
 import GuildType from '../../@types/Guild.interface';
 
-const logger = new Logger();
-
 const Volume = (bot: Client) => {
     bot.on('message', async (message: Message) => {
         try {
@@ -31,14 +29,14 @@ const Volume = (bot: Client) => {
                     player.setVolume(Number(args[1]));
                     message.reply(`Ive set the volume to ${Number(args[1])}`);
                 } catch (err) {
-                    logger.warn(`An error occured whilst setting volume  in ${message.guild.id}`)
+                    Logger.warn(`An error occured whilst setting volume  in ${message.guild.id}`)
                     message.reply('An error occured.')
                 }
             } else {
                 return null;
             }
         } catch (err) {
-            logger.warn(`An error occured whilst settin volume in ${message.guild.id}`)
+            Logger.warn(`An error occured whilst settin volume in ${message.guild.id}`)
             message.reply('An error occured.')
         }
     })

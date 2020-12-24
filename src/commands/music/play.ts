@@ -5,8 +5,6 @@ import Client from '../../@types/Client.interface';
 import Message from '../../@types/Message.interface';
 import GuildType from '../../@types/Guild.interface';
 
-const logger = new Logger();
-
 const Play: Function = (bot: Client) => {
     bot.on('message', async (message: Message) => {
         try {
@@ -44,13 +42,13 @@ const Play: Function = (bot: Client) => {
                     player.queue.totalSize === res.tracks.length
                 )
                     player.play();
-                logger.success(`Successfully started playing ${res.tracks[0].title} to ${message.guild.id}`);
+                Logger.success(`Successfully started playing ${res.tracks[0].title} to ${message.guild.id}`);
             } else {
                 return null;
             }
         } catch (err) {
             message.reply('An error occured.')
-            logger.warn(`An error occured whist playing to ${message.guild.id}`)
+            Logger.warn(`An error occured whist playing to ${message.guild.id}`)
         }
     })
 }

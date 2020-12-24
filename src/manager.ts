@@ -7,8 +7,6 @@ import Config from '../config.json';
 import Logger from './logger';
 import Client from './@types/Client.interface';
 
-const logger = new Logger();
-
 const MusicManager: Function = (bot: Client) => {
 
     bot.manager = new Manager({
@@ -24,8 +22,8 @@ const MusicManager: Function = (bot: Client) => {
             if (guild) guild.shard.send(payload);
         },
     })
-        .on("nodeConnect", (node: any) => logger.success(`Connected to lavalink! Node: ${node.options.identifier}`))
-        .on("nodeError", (node: any, error: any) => logger.warn(`Node: ${node.options.identifier} had an error. Error: ${error.message}`))
+        .on("nodeConnect", (node: any) => Logger.success(`Connected to lavalink! Node: ${node.options.identifier}`))
+        .on("nodeError", (node: any, error: any) => Logger.warn(`Node: ${node.options.identifier} had an error. Error: ${error.message}`))
         .on("trackStart", (player: any, track: any) => {
             let trackStartEmbed = new MessageEmbed()
             trackStartEmbed.setTitle('**Now Playing**')

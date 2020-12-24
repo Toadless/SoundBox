@@ -7,8 +7,6 @@ import Client from '../@types/Client.interface';
 import Message from '../@types/Message.interface';
 import GuildType from '../@types/Guild.interface';
 
-const logger = new Logger();
-
 const Prefix = async (bot: Client) => {
     bot.on('message', async (message: Message) => {
         const guild: GuildType = await Guild.findOne({
@@ -24,7 +22,7 @@ const Prefix = async (bot: Client) => {
                 await guild.updateOne({ prefix: args[1] })
                 message.reply(`Your prefix has been updated to ${args[1]}`)
             } catch (err) {
-                logger.error('Unable to change a guilds prefix.')
+                Logger.error('Unable to change a guilds prefix.')
                 message.reply('An error occured.')
             }
             return;

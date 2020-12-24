@@ -8,8 +8,6 @@ import Client from '../@types/Client.interface';
 import GuildType from '../@types/Guild.interface';
 import Config from '../../config.json';
 
-const logger = new Logger();
-
 const guildCreate: Function = (bot: Client) => {
     bot.on('guildCreate', (guild: any) => {
         try {
@@ -32,7 +30,7 @@ const guildCreate: Function = (bot: Client) => {
             embed.setFooter('♪♪');
             channel.send(embed);
         } catch (err) {
-            logger.warn('Failed to send the welcome message')
+            Logger.warn('Failed to send the welcome message')
         }
         try {
             const newGuild: GuildType = new Guild({
@@ -40,9 +38,9 @@ const guildCreate: Function = (bot: Client) => {
                 prefix: Config.bot.default_prefix
             }) as GuildType;
             newGuild.save();
-            logger.success('Successfully created a new guilds database.')
+            Logger.success('Successfully created a new guilds database.')
         } catch (err) {
-            logger.error('Failed to create a new database value for a guild.')
+            Logger.error('Failed to create a new database value for a guild.')
         }
     })
 }
