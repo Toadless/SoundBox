@@ -29,6 +29,7 @@ const MusicManager: Function = (bot: Client) => {
             trackStartEmbed.setTitle('**Now Playing**')
             trackStartEmbed.setThumbnail(track.thumbnail);
             trackStartEmbed.setDescription(track.title)
+            trackStartEmbed.setColor('#1ebfe2')
             bot.channels.cache
                 .get(player.textChannel)
                 .send(trackStartEmbed);
